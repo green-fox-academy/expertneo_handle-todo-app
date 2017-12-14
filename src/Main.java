@@ -30,8 +30,9 @@ public class Main {
     }
 
     //ADD AN ITEM ----------------------------------------
-    if(args[0].equals ("-a")) {
+    else if(args[0].equals ("-a")) {
       asd.addTask("hello", false);
+      asd.writeInFile();
       System.out.println("Item added to the list");
       System.exit(0);
     }

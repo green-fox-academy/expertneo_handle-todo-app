@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ListOfTasks extends Task{
     try {
       Path filePath = Paths.get(path);
       List<String> readAllLines = Files.readAllLines(filePath);
-      System.out.println(readAllLines);
+//      System.out.println(readAllLines);
     } catch (IOException e) {
       System.out.println("Unable to read the file given...");
     }
@@ -27,6 +28,8 @@ public class ListOfTasks extends Task{
   public void addTask (String task, Boolean isDone) {
     Task variableTask = new Task(task, isDone);
     tasks.add(variableTask);
+    writeInFile();
+    System.out.println(tasks);
     System.out.println("You added an entry to the List");
   }
 
@@ -42,9 +45,10 @@ public class ListOfTasks extends Task{
   public void writeInFile() {
     try {
       Path filePath = Paths.get(path);
-      List<String> tasks = Files.readAllLines(filePath);
-      Files.write(filePath, tasks);
+//      List<String> tasks = Files.readAllLines(filePath);
+      Files.write(filePath, (Iterable<? extends CharSequence>) tasks, StandardOpenOption.APPEND);
       System.out.println(tasks);
+      System.out.println("File written");
     } catch (Exception e){
       System.out.println("Unable to write file: " + path);
     }
